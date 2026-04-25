@@ -3,97 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sufera Kunni - Profile</title>
+    <title>Dynamic Profile Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: #eef2f7;
             margin: 0;
-            padding: 0;
-            background: #f4f6f9;
+            padding: 20px;
         }
         .container {
-            max-width: 800px;
-            margin: 50px auto;
-            background: #ffffff;
-            padding: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .form-section, .profile-section {
+            background: #fff;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 300px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
         }
         .profile-header {
             text-align: center;
         }
-        .profile-header h1 {
-            margin-bottom: 5px;
-        }
-        .profile-header p {
-            color: #666;
-        }
         .section {
-            margin-top: 20px;
+            margin-top: 15px;
         }
-        .section h2 {
+        .section h3 {
             border-bottom: 2px solid #4CAF50;
             padding-bottom: 5px;
-        }
-        .info {
-            margin-top: 10px;
-        }
-        .info p {
-            margin: 5px 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #aaa;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="profile-header">
-        <h1>Sufera Kunni</h1>
-        <p>MSc IT Student</p>
+    
+    <!-- Form -->
+    <div class="form-section">
+        <h2>Enter Your Details</h2>
+        <input type="text" id="name" value="Sufera Kunni">
+        <input type="text" id="title" value="MSc IT Student">
+        <textarea id="about">I am a student studying MSc IT.</textarea>
+        <input type="text" id="skills" placeholder="Skills (comma separated)">
+        <input type="email" id="email" value="suferakuunhi@gmail.com">
+
+        <button onclick="generateProfile()">Generate Profile</button>
     </div>
 
-    <div class="section">
-        <h2>About Me</h2>
-        <p>
-            I am Sufera Kunni, a passionate MSc IT student with an interest in technology,
-            software development, and continuous learning.
-        </p>
-    </div>
+    <!-- Profile -->
+    <div class="profile-section">
+        <div class="profile-header">
+            <h1 id="pName">Sufera Kunni</h1>
+            <p id="pTitle">MSc IT Student</p>
+        </div>
 
-    <div class="section">
-        <h2>Education</h2>
-        <div class="info">
-            <p><strong>Degree:</strong> MSc IT</p>
-            <p><strong>Status:</strong> Currently Studying</p>
+        <div class="section">
+            <h3>About Me</h3>
+            <p id="pAbout">I am a student studying MSc IT.</p>
+        </div>
+
+        <div class="section">
+            <h3>Skills</h3>
+            <ul id="pSkills"></ul>
+        </div>
+
+        <div class="section">
+            <h3>Contact</h3>
+            <p id="pEmail">suferakuunhi@gmail.com</p>
         </div>
     </div>
 
-    <div class="section">
-        <h2>Skills</h2>
-        <div class="info">
-            <p>- HTML</p>
-            <p>- CSS</p>
-            <p>- JavaScript</p>
-            <p>- Programming Basics</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Contact</h2>
-        <div class="info">
-            <p><strong>Email:</strong> your-email@example.com</p>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>© 2026 Sufera Kunni</p>
-    </div>
 </div>
+
+<script>
+function generateProfile() {
+    let name = document.getElementById("name").value;
+    let title = document.getElementById("title").value;
+    let about = document.getElementById("about").value;
+    let skills = document.getElementById("skills").value.split(",");
+    let email = document.getElementById("email").value;
+
+    document.getElementById("pName").innerText = name;
+    document.getElementById("pTitle").innerText = title;
+    document.getElementById("pAbout").innerText = about;
+    document.getElementById("pEmail").innerText = email;
+
+    let skillsList = document.getElementById("pSkills");
+    skillsList.innerHTML = "";
+    skills.forEach(skill => {
+        if(skill.trim() !== "") {
+            let li = document.createElement("li");
+            li.innerText = skill.trim();
+            skillsList.appendChild(li);
+        }
+    });
+}
+</script>
 
 </body>
 </html>
